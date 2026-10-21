@@ -6,6 +6,8 @@ int main(void)
 {
 	InitWindow(800, 600, "Programa10ExemploRaylib01");
 	
+	InitAudioDevice();
+	
 	SetTargetFPS(60);
 	
 	ChangeDirectory(GetApplicationDirectory());
@@ -14,9 +16,18 @@ int main(void)
 
 	Player player;
 	
+	Music bgMusic = LoadMusicStream("assets/music/music.mp3");
+	
+	PlayMusicStream(bgMusic);
+	
 	while(!WindowShouldClose()){
 		
-		//TODO: update
+		//retorna tempo que last frame foi processado
+		deltaTime = GetFrameTime();
+		
+		UpdateMusicStream(bgMusic);
+		
+		player.update(deltaTime);
 		
 		BeginDrawing();
 			
@@ -25,6 +36,8 @@ int main(void)
 		
 		EndDrawing();
 	}
+	
+	UnloadMusicStream(bgMusic);
 	
 	CloseWindow();
 	
