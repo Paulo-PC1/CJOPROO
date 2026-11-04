@@ -7,7 +7,7 @@ Player::Player()
 	
 	// Define posição inicial do player
 	position.x = (GetScreenWidth() - texture.width) / 2.0f; // ou * 0.5f
-	position.y = GetScreenHeight() - texture.width - 10.0f;
+	position.y = (GetScreenHeight() - texture.width) - 10.0f;
 	
 	// Velocidade de Movimento player
 	speed = 150.0f;
