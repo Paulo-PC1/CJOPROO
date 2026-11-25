@@ -16,6 +16,14 @@ public:
 	
 	void CheckScreenLimits(); // Verifica limites da tela (tipo colisão )
 	
+	Vector2 getPosition() const;
+	
+	float getRadius() const;
+	
+	void takeDamage(int damage);
+	
+	int getHealth() const;
+	
 private:
 	
 	Texture2D texture; // Textura player
@@ -23,4 +31,8 @@ private:
 	Vector2 position; // Posição jogador tela
 	
 	float speed; // Velocidade do player
+	
+	float radius;
+	
+	int health;
 };

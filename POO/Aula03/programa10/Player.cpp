@@ -6,23 +6,29 @@ Player::Player()
 	texture = LoadTexture("assets/image/player.png"); // Carrega textura do player
 	
 	// Define posição inicial do player
-	position.x = (GetScreenWidth() - texture.width) / 2.0f; // ou * 0.5f
+	position.x = (GetScreenWidth() - texture.width) / 0.5f; // ou * 0.5f
 	position.y = (GetScreenHeight() - texture.width) - 10.0f;
 	
 	// Velocidade de Movimento player
 	speed = 150.0f;
+	
+	radius = 52.0f;
+	
+	health = 100;
 }
 
 // Destrutor
 Player::~Player() 
 {
-	UnloadTexture(texture);	// Descarregatextura player
+	UnloadTexture(texture);	// Descarrega textura player
 }
 
 // Desenha player na tela
 void Player::draw() const
 {
 	DrawTexture(texture, position.x, position.y, RAYWHITE); // Rendeniza o player na tela
+	
+	/*DrawCircle(position.x + texture.width / 2.0f + 2.0f, position.y + texture.height / 2.0f, radius, {255, 0, 0, 100};*/
 } 
 
 // Atualiza lógica do player
@@ -60,4 +66,32 @@ void Player::CheckScreenLimits()
 	if(position.y + texture.height >= GetScreenHeight()){
 		position.y = GetScreenHeight() - texture.height;
 	}
+}
+
+Vector2 Player::getPosition() const
+{
+	return{
+	position.x + texture.width / 2.0f,
+	position.y + texture.height / 2.0f
+};
+}
+
+float Player::getRadius() const
+{
+	return radius;
+}
+
+void Player::takeDamage(int damage)
+{
+	health -= damage;
+	
+	if(health < 0)
+	{
+		health = 0;
+	}
+}
+
+int Player::getHealth() const
+{
+	return health;
 }
